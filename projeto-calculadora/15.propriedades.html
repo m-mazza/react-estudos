@@ -59,28 +59,48 @@
         <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
         <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
         <script type="text/babel">
 
-            // quando o retorno da função é apenas uma linha JSX, podemos fazer como está abaixo
-            const Header = () => <div class="header">Calculadora</div>
-
-            const Calculator = () => (
-                <div class="calculator">
-                    <div class="display"></div>
-                    <div class="keybord">
-                        <button>7</button>
-                        <button>8</button>
-                        <button>9</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>0</button>
-                    </div>
-                </div>
+            const Header = () => <div class="header">Calculadora - aula 15 - propriedades (props)</div>
+            const Button = (props) => (
+                <button 
+                    onClick={()=>{
+                       props.onNumberClick(props.value)
+                    }}
+                >
+                {props.value}
+                </button>
             );
+                
+
+            const Calculator = () => {
+
+                const [display, setDisplay] = React.useState("")
+                const handleNumberClick = (value) => {
+                    setDisplay(`${display}${value}`);
+                }
+                return (
+                    <div class="calculator">
+                        <div class="display">
+                            {display}
+                        </div>
+                        <div class="keybord">
+                            <Button value="7" onNumberClick={handleNumberClick} />
+                            <Button value="8" onNumberClick={handleNumberClick} />
+                            <Button value="9" onNumberClick={handleNumberClick} />
+                            <Button value="4" onNumberClick={handleNumberClick} />
+                            <Button value="5" onNumberClick={handleNumberClick} />
+                            <Button value="6" onNumberClick={handleNumberClick} />
+                            <Button value="1" onNumberClick={handleNumberClick} />
+                            <Button value="2" onNumberClick={handleNumberClick} />
+                            <Button value="3" onNumberClick={handleNumberClick} />
+                            <Button value="0" onNumberClick={handleNumberClick} />
+                        </div>
+                    </div>
+                )
+            };
             const App = () => (
                 <div>
                     <Header/>
